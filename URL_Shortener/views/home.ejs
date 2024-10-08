@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: 80%;
+        max-width: 900px;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        color: #4e73df;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      label {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 70%;
+        padding: 15px;
+        border-radius: 30px;
+        border: 1px solid #ddd;
+        font-size: 1.1rem;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        border-color: #4e73df;
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #4e73df 0%, #1cc88a 100%);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #1cc88a 0%, #4e73df 100%);
+        transform: scale(1.05);
+      }
+
+      .short-url {
+        font-size: 1.3rem;
+        color: #1cc88a;
+        font-weight: bold;
+        margin-top: 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .short-url:hover {
+        color: #4e73df;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      th, td {
+        padding: 15px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      th {
+        background-color: #4e73df;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      td {
+        background-color: #ffffff;
+        color: #555;
+        transition: background-color 0.3s ease;
+      }
+
+      tr:hover td {
+        background-color: #f1f1f1;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      
+      td.wrap-url {
+        max-width: 200px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+      }
+
+      
+      td.ellipsis-url {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+        }
+
+        input[type="text"] {
+          width: 90%;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+
+      <% if (locals.id) { %>
+      <p>Short URL: 
+        <a href="http://localhost:7700/url/<%= id %>" class="short-url">
+          http://localhost:7700/url/<%= id %>
+        </a>
+      </p>
+      <% } %>
+
+      <form method="post" action="/url">
+        <label for="redirectURL">Enter Your Original URL</label>
+        <input
+          type="text"
+          name="url"
+          id="redirectURL"
+          placeholder="https://example.com"
+        />
+        <button type="submit">Generate Short URL</button>
+      </form>
+
+      <% if (locals.urls) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Short ID</th>
+            <th>Redirect URL</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= url.shortId %></td>
+            <td class="wrap-url"><%= url.redirectURL %></td>     
+            <td><%= url.visitHistory.length %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </body>
+</html>

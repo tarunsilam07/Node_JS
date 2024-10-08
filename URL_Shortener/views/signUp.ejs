@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+        /* Importing Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            animation: form-animation 0.7s ease-in-out;
+        }
+
+        @keyframes form-animation {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f5576c;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #f5576c;
+            box-shadow: 0 0 8px rgba(245, 87, 108, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #f5576c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #c54455;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #333;
+            font-size: 0.95rem;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        a {
+            color: #f5576c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #c54455;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="/user" method="post">
+        <h1>SignUp</h1>
+        <% if (locals.error) { %>
+            <p><%= locals.error %></p>
+           <% } %>
+        <label for="name">Username</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button type="submit">Sign Up</button>
+        
+        <p>Already have an account? <a href="/login">Login</a></p>
+
+    </form>
+</body>
+</html>

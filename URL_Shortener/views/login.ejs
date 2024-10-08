@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Font and basic resets */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            animation: form-animation 0.7s ease-in-out;
+        }
+
+        @keyframes form-animation {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #0077ff;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0077ff;
+            box-shadow: 0 0 8px rgba(0, 119, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 119, 255, 0.3);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #333;
+            font-size: 0.95rem;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        a {
+            color: #0077ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #005bb5;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="/user/login" method="post">
+        <h1>Login</h1>
+        <% if (locals.error) { %>
+         <p><%= locals.error %></p>
+        <% } %>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </form>
+</body>
+</html>
